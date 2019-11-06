@@ -34,4 +34,9 @@ public class CredentialService implements ServiceInterface {
 		return Credential.listAll();
 	}
 
+	@Override
+	public void save(Credential credential) {
+		credential.persist();
+	}
+
 }

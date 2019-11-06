@@ -27,5 +27,6 @@ import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 public interface ServiceInterface {
 	
 	public List<Credential> credentials();
+	public void save(Credential credential);
 	
 }
