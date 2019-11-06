@@ -1,5 +1,5 @@
 /*
-  passwords-manager use Quarkus for back-end and Angular for fron-tend.
+  passwords-manager use Quarkus for back-end and Angular for front-end.
   Copyright (C) 2019  Ivan Guerreschi
 
   This program is free software: you can redistribute it and/or modify
@@ -18,19 +18,19 @@
   Email ivanguerreschi86@gmail.com
 */
 
-package it.ivanguerreschi.passwordsmanager.api;
+package it.ivanguerreschi.passwordsmanager.domain.model;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import java.time.LocalDate;
 
-@Path("/api")
-public class PasswordResource {
+import javax.persistence.Entity;
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "hello";
-    }
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+
+@Entity
+public class Credential extends PanacheEntity {
+
+	public String name;
+	public String email;
+	public String password;
+	public LocalDate create;
 }
