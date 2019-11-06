@@ -23,7 +23,10 @@ package it.ivanguerreschi.passwordsmanager.api;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -47,7 +50,14 @@ public class PasswordResource {
     @GET
     @Path("/credentials")
     public List<Credential> credentials() {
-		return credentialService.credentials();
-    	
+		return credentialService.credentials();    	
     }
+    
+    @POST
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void save() {
+    	credentialService.save(new Credential());
+    }
+    
 }
