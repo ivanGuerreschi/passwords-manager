@@ -24,8 +24,11 @@ import java.util.List;
 
 import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 
-public interface ServiceInterface {
-	
-	public List<Credential> credentials();
-	
+public class CredentialService implements ServiceInterface {
+
+	@Override
+	public List<Credential> credentials() {
+		return Credential.listAll();
+	}
+
 }
