@@ -22,8 +22,11 @@ package it.ivanguerreschi.passwordsmanager.domain.service;
 
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 
+@ApplicationScoped
 public class CredentialService implements ServiceInterface {
 
 	@Override
