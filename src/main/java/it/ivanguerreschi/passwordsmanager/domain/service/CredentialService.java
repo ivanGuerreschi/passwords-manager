@@ -23,20 +23,43 @@ package it.ivanguerreschi.passwordsmanager.domain.service;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+import javax.json.Json;
 
-import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
+import it.ivanguerreschi.passwordsmanager.domain.model.Credential;;
 
 @ApplicationScoped
 public class CredentialService implements ServiceInterface {
 
-	@Override
-	public List<Credential> credentials() {
-		return Credential.listAll();
-	}
+  @Override
+  public List<Credential> credentials() {
+    return Credential.listAll();
+  }
 
-	@Override
-	public void save(Credential credential) {
-		credential.persist();
-	}
+  @Override
+  public void save(Credential credential) {
+    if (credential.id != null) {
+      throw new WebApplicationException("Id was invalidly set on request.", 422);
+    }
+    credential.persist();
+  }
+
+  @Provider
+  public static class ErrorMapper implements ExceptionMapper<Exception> {
+
+    @Override
+    public Response toResponse(Exception exception) {
+      int code = 500;
+      if (exception instanceof WebApplicationException) {
+        code = ((WebApplicationException) exception).getResponse().getStatus();
+      }
+      return Response.status(code)
+          .entity(Json.createObjectBuilder().add("error", exception.getMessage()).add("code", code).build()).build();
+    }
+
+  }
 
 }

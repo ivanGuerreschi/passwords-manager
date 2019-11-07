@@ -22,15 +22,33 @@ package it.ivanguerreschi.passwordsmanager.domain.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 @Entity
+@Cacheable
 public class Credential extends PanacheEntity {
 
-	public String name;
-	public String email;
-	public String password;
-	public LocalDate create;
+  public String name;
+  public String email;
+  public String password;
+  public LocalDate create;
+
+  public Credential() {
+
+  }
+
+  public Credential(String name, String email, String password, LocalDate create) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.create = create;
+  }
+
+  public void setCreate(LocalDate create) {
+    this.create = LocalDate.now();
+  }
+
 }

@@ -35,11 +35,12 @@ import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 import it.ivanguerreschi.passwordsmanager.domain.service.CredentialService;
 
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 @Path("/api")
 public class PasswordResource {
 	
-	@Inject
-	private CredentialService credentialService;
+    @Inject
+    private CredentialService credentialService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -50,14 +51,13 @@ public class PasswordResource {
     @GET
     @Path("/credentials")
     public List<Credential> credentials() {
-		return credentialService.credentials();    	
+       return credentialService.credentials();    	
     }
     
     @POST
     @Transactional
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void save() {
-    	credentialService.save(new Credential());
+    public void save(Credential credential) {
+    	credentialService.save(credential);
     }
     
 }
