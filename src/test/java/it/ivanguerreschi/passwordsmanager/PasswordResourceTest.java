@@ -16,9 +16,9 @@ public class PasswordResourceTest {
           .then()
              .statusCode(200)
              .body(
-                     containsString("Cherry"),
-                     containsString("Apple"),
-                     containsString("Banana")
+                     containsString("google"),
+                     containsString("microsoft"),
+                     containsString("twitter")
                      );
     }
 
