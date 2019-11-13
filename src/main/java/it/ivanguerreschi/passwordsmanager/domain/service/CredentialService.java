@@ -27,6 +27,9 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
+
+import io.quarkus.panache.common.Sort;
+
 import javax.json.Json;
 
 import it.ivanguerreschi.passwordsmanager.domain.model.Credential;;
@@ -34,32 +37,78 @@ import it.ivanguerreschi.passwordsmanager.domain.model.Credential;;
 @ApplicationScoped
 public class CredentialService implements ServiceInterface {
 
-  @Override
-  public List<Credential> credentials() {
-    return Credential.listAll();
-  }
+	@Provider
+	public static class ErrorMapper implements ExceptionMapper<Exception> {
 
-  @Override
-  public void save(Credential credential) {
-    if (credential.id != null) {
-      throw new WebApplicationException("Id was invalidly set on request.", 422);
-    }
-    credential.persist();
-  }
+		@Override
+		public Response toResponse(Exception exception) {
+			int code = 500;
+			if (exception instanceof WebApplicationException) {
+				code = ((WebApplicationException) exception).getResponse().getStatus();
+			}
+			return Response.status(code)
+					.entity(Json.createObjectBuilder().add("error", exception.getMessage()).add("code", code).build())
+					.build();
+		}
 
-  @Provider
-  public static class ErrorMapper implements ExceptionMapper<Exception> {
+	}
 
-    @Override
-    public Response toResponse(Exception exception) {
-      int code = 500;
-      if (exception instanceof WebApplicationException) {
-        code = ((WebApplicationException) exception).getResponse().getStatus();
-      }
-      return Response.status(code)
-          .entity(Json.createObjectBuilder().add("error", exception.getMessage()).add("code", code).build()).build();
-    }
+	@Override
+	public List<Credential> get(Sort sort) {
+		return Credential.listAll();
+	}
 
-  }
+	@Override
+	public void create(Credential credential) {
+		if (credential.id != null) {
+			throw new WebApplicationException("Id was invalidly set on request.", 422);
+		}
+		credential.persist();
+	}
+
+	@Override
+	public Credential getSingle(Long id) {
+		Credential entity = Credential.findById(id);
+		if (entity == null) {
+            throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
+        }
+        return entity;		
+	}
+
+	@Override
+	public Credential update(Long id, Credential credential) {
+		if (credential.name == null) {
+            throw new WebApplicationException("Credential Name was not set on request.", 422);
+        }
+		
+		if (credential.email == null) {
+            throw new WebApplicationException("Credential Email was not set on request.", 422);
+        }
+		
+		if (credential.password == null) {
+            throw new WebApplicationException("Credential Password was not set on request.", 422);
+        }
+
+        Credential entity = Credential.findById(id);
+
+        if (entity == null) {
+            throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
+        }
+
+        entity.name = credential.name;
+        entity.email = credential.email;
+        entity.password = credential.password;
+
+        return entity;
+	}
+
+	@Override
+	public void delete(Long id) {
+		Credential entity = Credential.findById(id);
+	    if (entity == null) {
+	    	throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
+	    }
+	    entity.delete();
+	}
 
 }
