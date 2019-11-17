@@ -22,19 +22,18 @@ package it.ivanguerreschi.passwordsmanager.domain.service;
 
 import java.util.List;
 
-import io.quarkus.panache.common.Sort;
 import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 
 public interface ServiceInterface {
 
-	public List<Credential> get(Sort sort);
+  public List<Credential> get();
 
-	public void create(Credential credential);
-	
-	public Credential getSingle(Long id);
-	
-	public Credential update(Long id, Credential credential);
-	
-	public void delete(Long id);
+  public void create(Credential credential);
+
+  public Credential getSingle(Long id);
+
+  public Credential update(Long id, Credential credential);
+
+  public void delete(Long id);
 
 }

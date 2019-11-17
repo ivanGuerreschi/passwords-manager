@@ -22,9 +22,11 @@ package it.ivanguerreschi.passwordsmanager.api;
 
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,51 +34,51 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.PathParam;
 
-import org.jboss.resteasy.annotations.jaxrs.PathParam;
-
-import io.quarkus.panache.common.Sort;
 import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 import it.ivanguerreschi.passwordsmanager.domain.service.CredentialService;
 
+@Path("/api")
+@ApplicationScoped
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/api")
 public class PasswordResource {
-	
-    @Inject
-    private CredentialService credentialService;
-            
-    @GET
-    public List<Credential> get() {
-       return credentialService.get(Sort.by("name"));    	
-    }
-    
-    @POST
-    @Transactional
-    public void create(Credential credential) {
-    	credentialService.create(credential);
-    }
-    
-    @GET
-    @Path("{id}")
-    public Credential getSingle(@PathParam Long id) {
-    	return credentialService.getSingle(id);
-    }
-    
-    @PUT
-    @Path("{id}")
-    @Transactional
-    public Credential update(@PathParam Long id, Credential credential) {
-		return credentialService.update(id, credential);    	
-    }
-    
-    @DELETE
-    @Path("{id}")
-    @Transactional
-	public void delete(Long id) {
-		credentialService.delete(id);
-	}
 
-    
+  @Inject
+  private CredentialService credentialService;
+
+  @GET
+  public List<Credential> get() {
+    return credentialService.get();
+  }
+
+  @POST
+  @Transactional
+  public Response create(Credential credential) {
+    credentialService.create(credential);
+    return Response.ok(credential).status(201).build();
+  }
+
+  @GET
+  @Path("{id}")
+  public Credential getSingle(@PathParam("id") Long id) {
+    return credentialService.getSingle(id);
+  }
+
+  @PUT
+  @Path("{id}")
+  @Transactional
+  public Response update(@PathParam("id") Long id, Credential credential) {
+    credentialService.update(id, credential);
+    return Response.status(204).build();
+  }
+
+  @DELETE
+  @Path("{id}")
+  @Transactional
+  public Response delete(@PathParam("id") Long id) {
+    credentialService.delete(id);
+    return Response.status(204).build();
+  }
 }

@@ -24,38 +24,17 @@ import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 
 import io.quarkus.panache.common.Sort;
 
-import javax.json.Json;
-
-import it.ivanguerreschi.passwordsmanager.domain.model.Credential;;
+import it.ivanguerreschi.passwordsmanager.domain.model.Credential;
 
 @ApplicationScoped
 public class CredentialService implements ServiceInterface {
 
-	@Provider
-	public static class ErrorMapper implements ExceptionMapper<Exception> {
-
-		@Override
-		public Response toResponse(Exception exception) {
-			int code = 500;
-			if (exception instanceof WebApplicationException) {
-				code = ((WebApplicationException) exception).getResponse().getStatus();
-			}
-			return Response.status(code)
-					.entity(Json.createObjectBuilder().add("error", exception.getMessage()).add("code", code).build())
-					.build();
-		}
-
-	}
-
 	@Override
-	public List<Credential> get(Sort sort) {
-		return Credential.listAll();
+	public List<Credential> get() {
+		return Credential.listAll(Sort.by("name"));
 	}
 
 	@Override
@@ -72,7 +51,7 @@ public class CredentialService implements ServiceInterface {
 		if (entity == null) {
             throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
         }
-        return entity;		
+		return entity;
 	}
 
 	@Override
@@ -87,28 +66,27 @@ public class CredentialService implements ServiceInterface {
 		
 		if (credential.password == null) {
             throw new WebApplicationException("Credential Password was not set on request.", 422);
-        }
-
-        Credential entity = Credential.findById(id);
-
-        if (entity == null) {
+        }		
+		
+		Credential entity = Credential.findById(id);
+		
+		if (entity == null) {
             throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
         }
-
-        entity.name = credential.name;
-        entity.email = credential.email;
-        entity.password = credential.password;
-
-        return entity;
+		
+		entity.name = credential.name;
+		entity.email = credential.email;
+		entity.password = credential.password;
+		return entity;
 	}
 
 	@Override
 	public void delete(Long id) {
 		Credential entity = Credential.findById(id);
-	    if (entity == null) {
-	    	throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
-	    }
-	    entity.delete();
+		if (entity == null) {
+			throw new WebApplicationException("Credential with id of " + id + " does not exist.", 404);
+		}
+		entity.delete();
 	}
 
 }
