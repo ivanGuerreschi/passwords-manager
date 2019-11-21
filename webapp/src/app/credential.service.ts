@@ -11,22 +11,6 @@ export class CredentialService {
 
   constructor(private http: HttpClient) { }
 
-  getCredential(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
-  }
-
-  createCredential(credential: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, credential);
-  }
-
-  updateCredential(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
-  }
-
-  deleteCredential(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'json' });
-  }
-
   getCredentialsList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }

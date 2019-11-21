@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CredentialService } from '../credential.service';
+import { Credential } from '../credential';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,8 +26,9 @@ import { Router } from '@angular/router';
         <tr *ngFor="let credential of credentials | async">
           <td>{{credential.id}}</td>
           <td>{{credential.name}}</td>
-          <td>{{credential.password}</td>
-          <td>{{credential.create}</td>
+          <td>{{credential.email}}</td>
+          <td>{{credential.password}}</td>
+          <td>{{credential.create}}</td>
         </tr>
       </tbody>
     </table>
