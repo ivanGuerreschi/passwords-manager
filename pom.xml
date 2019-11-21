@@ -1,6 +1,5 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" ?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>it.ivanguerreschi.passwordsmanager</groupId>
   <artifactId>passwords-manager</artifactId>
@@ -10,7 +9,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <version.frontend-maven-plugin>1.8.0</version.frontend-maven-plugin>
     <maven.compiler.source>11</maven.compiler.source>
-    <quarkus.version>1.0.0.CR1</quarkus.version>
+    <quarkus.version>1.0.0.CR2</quarkus.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.parameters>true</maven.compiler.parameters>
