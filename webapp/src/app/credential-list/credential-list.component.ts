@@ -29,6 +29,9 @@ import { Router } from '@angular/router';
           <td>{{credential.email}}</td>
           <td>{{credential.password}}</td>
           <td>{{credential.create}}</td>
+          <td><button (click)="deleteCredential(credential.id)" class="btn btn-danger">Delete</button>
+              <button (click)="credentialDetails(credential.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -49,6 +52,20 @@ export class CredentialListComponent implements OnInit {
 
   reloadData() {
     this.credentials = this.credentialService.getCredentialsList();
+  }
+
+  deleteCredential(id: number) {
+    this.credentialService.deleteCredential(id)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.reloadData();
+        },
+        error => console.log(error));
+  }
+
+  credentialDetails(id: number) {
+    this.router.navigate(['details', id]);
   }
 
 }

@@ -5,11 +5,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CredentialListComponent } from './credential-list/credential-list.component';
+import { CreateCredentialComponent } from './create-credential/create-credential.component';
+import { CredentialDetailsComponent } from './credential-details/credential-details.component';
+import { UpdateCredentialComponent } from './update-credential/update-credential.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CredentialListComponent
+    CredentialListComponent,
+    CreateCredentialComponent,
+    CredentialDetailsComponent,
+    UpdateCredentialComponent
   ],
   imports: [
     BrowserModule,
