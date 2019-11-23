@@ -15,17 +15,17 @@ import { Router } from '@angular/router';
       </div>
 
       <div class="form-group">
-        <label for="email">Email</label>
+        <label for="name">Email</label>
         <input type="text" class="form-control" id="email" required [(ngModel)]="credential.email" name="email">
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="name">Password</label>
         <input type="text" class="form-control" id="password" required [(ngModel)]="credential.password" name="password">
       </div>
 
        <div class="form-group">
-        <label for="create">Data</label>
+        <label for="name">Data</label>
         <input type="text" class="form-control" id="create" required [(ngModel)]="credential.create" name="create">
       </div>
 
@@ -35,7 +35,7 @@ import { Router } from '@angular/router';
 
   <div [hidden]="!submitted">
     <h4>You submitted successfully!</h4>
-    <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+    <!-- <button class="btn btn-success" (click)="newCredential()">Add</button> -->
   </div>
   `,
   styles: []
