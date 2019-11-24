@@ -31,6 +31,7 @@ import { Router } from '@angular/router';
           <td>{{credential.create}}</td>
           <td><button (click)="deleteCredential(credential.id)" class="btn btn-danger">Delete</button>
               <button (click)="credentialDetails(credential.id)" class="btn btn-info" style="margin-left: 10px">Details</button>
+			  <button (click)="update(credential.id)" class="btn btn-info" style="margin-left: 10px">Update</button>
           </td>
         </tr>
       </tbody>
@@ -66,6 +67,10 @@ export class CredentialListComponent implements OnInit {
 
   credentialDetails(id: number) {
     this.router.navigate(['details', id]);
+  }
+  
+  update(id: number) {
+    this.router.navigate(['update', id]);
   }
 
 }

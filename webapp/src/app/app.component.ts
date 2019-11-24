@@ -12,6 +12,9 @@ import { Component } from '@angular/core';
       <li class="nav-item">
           <a routerLink="add" class="nav-link" routerLinkActive="active">Add Credential</a>
       </li>
+	  <li class="nav-item">
+          <a routerLink="" class="nav-link" (click)="refresh()">Refresh</a>
+      </li>
     </ul>
   </nav>
   <div class="container">
@@ -35,4 +38,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Passwords Manager';
+  
+  refresh(): void {
+    window.location.reload();
+}
 }

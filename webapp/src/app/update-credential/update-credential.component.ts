@@ -67,7 +67,7 @@ export class UpdateCredentialComponent implements OnInit {
   }
 
   gotoList() {
-    this.router.navigate(['/Credentials']);
+    this.router.navigate(['/credentials']);
   }
 
 }

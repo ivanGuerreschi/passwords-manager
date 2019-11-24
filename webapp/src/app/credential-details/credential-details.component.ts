@@ -14,7 +14,7 @@ import { Credential } from '../credential';
         <label><b>Name: </b></label> {{credential.name}}
       </div>
       <div>
-        <label><b>Email: </b></label> {{credential.email}
+        <label><b>Email: </b></label> {{credential.email}}
       </div>
       <div>
         <label><b>Password: </b></label> {{credential.password}}

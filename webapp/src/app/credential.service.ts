@@ -20,11 +20,11 @@ export class CredentialService {
   }
 
   createCredential(credential: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, credential);
+    return this.http.post(`${this.baseUrl}`, credential, { responseType: 'json' });
   }
 
   updateCredential(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+    return this.http.put(`${this.baseUrl}/${id}`, value, { responseType: 'json' });
   }
 
   deleteCredential(id: number): Observable<any> {

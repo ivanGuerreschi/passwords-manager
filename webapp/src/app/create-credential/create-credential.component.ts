@@ -7,36 +7,36 @@ import { Router } from '@angular/router';
   selector: 'app-create-credential',
   template: `
       <h3>Create Credential</h3>
-  <div [hidden]="submitted" style="width: 400px;">
-    <form (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" required [(ngModel)]="credential.name" name="name">
-      </div>
+	  <div [hidden]="submitted" style="width: 400px;">
+		<form (ngSubmit)="onSubmit()">
+		  <div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" class="form-control" id="name" required [(ngModel)]="credential.name" name="name">
+		  </div>
 
-      <div class="form-group">
-        <label for="name">Email</label>
-        <input type="text" class="form-control" id="email" required [(ngModel)]="credential.email" name="email">
-      </div>
+		  <div class="form-group">
+			<label for="name">Email</label>
+			<input type="text" class="form-control" id="email" required [(ngModel)]="credential.email" name="email">
+		  </div>
 
-      <div class="form-group">
-        <label for="name">Password</label>
-        <input type="text" class="form-control" id="password" required [(ngModel)]="credential.password" name="password">
-      </div>
+		  <div class="form-group">
+			<label for="name">Password</label>
+			<input type="text" class="form-control" id="password" required [(ngModel)]="credential.password" name="password">
+		  </div>
 
-       <div class="form-group">
-        <label for="name">Data</label>
-        <input type="text" class="form-control" id="create" required [(ngModel)]="credential.create" name="create">
-      </div>
+		   <div class="form-group">
+			<label for="name">Data</label>
+			<input type="text" class="form-control" id="create" required [(ngModel)]="credential.create" name="create">
+		  </div>
 
-      <button type="submit" class="btn btn-success">Submit</button>
-    </form>
-  </div>
+		  <button type="submit" class="btn btn-success">Submit</button>
+		</form>
+	  </div>
 
-  <div [hidden]="!submitted">
-    <h4>You submitted successfully!</h4>
-    <!-- <button class="btn btn-success" (click)="newCredential()">Add</button> -->
-  </div>
+	  <div [hidden]="!submitted">
+		<h4>You submitted successfully!</h4>
+		<!-- <button class="btn btn-success" (click)="newCredential()">Add</button> -->
+	  </div>
   `,
   styles: []
 })
